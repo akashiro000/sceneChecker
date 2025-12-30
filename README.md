@@ -9,7 +9,6 @@ Maya Scene Checkerは、Mayaシーンの品質をチェックし、一般的な�
 ## 特徴
 
 - **外部JSON設定**: チェック項目を外部JSONファイルで管理
-- **モードレスUI**: Mayaのメインウィンドウと並行して操作可能
 - **進捗表示**: ESCキーでキャンセル可能なプログレスダイアログ
 - **自動修正機能**: 修正可能な問題に対してAdjustボタンを提供
 - **バッチ処理**: 複数シーンファイルを一括チェックしてCSV出力
@@ -70,28 +69,6 @@ scene_files = [
 batch_multiple(scene_files, "bg_checks", output_dir="C:/temp/results")
 ```
 
-## チェック項目
-
-### 背景アセット用 (bg_checks)
-
-- **ジオメトリ**: Non-Manifold Geometry, N-gons, Zero Area Faces
-- **テクスチャ**: UV Issues, Missing Textures
-- **ネーミング**: BG Naming Convention (`{area}_{modelname}_{id}`)
-- **トランスフォーム**: Transform Issues (非フリーズ、負のスケール)
-
-### モーション用 (motion_checks)
-
-- **リグ**: Rig Issues, Skinning Issues, Unused Influences
-- **アニメーション**: Animation Keys
-- **ネーミング**: Naming Convention
-
-### エフェクト用 (effect_checks)
-
-- **ジオメトリ**: Geometry Issues
-- **シェーダー**: Shader Issues (lambert1以外を検出)
-- **テクスチャ**: UV Issues, Texture Sequences
-- **ネーミング**: Naming Convention
-
 ## カスタム設定の作成
 
 `sceneChecker/configs/` ディレクトリに新しいJSONファイルを作成:
@@ -128,9 +105,8 @@ batch_multiple(scene_files, "bg_checks", output_dir="C:/temp/results")
 ## 技術仕様
 
 - **対応バージョン**: Maya 2025
-- **UIフレームワーク**: PySide6/PySide2
+- **UIフレームワーク**: PySide6
 - **Python**: 3.x
-- **アーキテクチャ**: モードレスQWidget
 
 ## ライセンス
 
