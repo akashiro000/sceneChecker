@@ -146,7 +146,7 @@ def check_geometry_issues(check_info):
             "severity": "error",
             "description": "ラミナフェースが検出されました",
             "items": lamina,
-            "adjust_function": "adjust_lamina_faces"
+            "adjust_function": adjust_lamina_faces
         })
 
     # Zero Edge Length
@@ -171,7 +171,7 @@ def check_geometry_issues(check_info):
             "severity": "warning",
             "description": "長さゼロのエッジが検出されました",
             "items": zero_edges,
-            "adjust_function": "adjust_zero_edge_length"
+            "adjust_function": adjust_zero_edge_length
         })
 
     return results
@@ -200,7 +200,7 @@ def check_ngons(check_info):
             "severity": check_info["severity"],
             "description": check_info["description"],
             "items": ngons,
-            "adjust_function": "adjust_ngons"
+            "adjust_function": adjust_ngons
         }
     return None
 
@@ -228,7 +228,7 @@ def check_zero_area_faces(check_info):
             "severity": check_info["severity"],
             "description": check_info["description"],
             "items": zero_faces,
-            "adjust_function": "adjust_zero_area_faces"
+            "adjust_function": adjust_zero_area_faces
         }
     return None
 
@@ -492,7 +492,7 @@ def check_transform_issues(check_info):
             "severity": "warning",
             "description": "フリーズされていないトランスフォームが検出されました",
             "items": non_frozen,
-            "adjust_function": "adjust_non_frozen_transforms"
+            "adjust_function": adjust_non_frozen_transforms
         })
 
     # Negative Scale
@@ -512,7 +512,7 @@ def check_transform_issues(check_info):
             "severity": "error",
             "description": "負のスケール値が検出されました",
             "items": negative_scale,
-            "adjust_function": "adjust_negative_scale"
+            "adjust_function": adjust_negative_scale
         })
 
     return results
@@ -603,7 +603,7 @@ def check_unused_influences(check_info):
             "severity": check_info["severity"],
             "description": check_info["description"],
             "items": unused,
-            "adjust_function": "adjust_unused_influences"
+            "adjust_function": adjust_unused_influences
         }
     return None
 

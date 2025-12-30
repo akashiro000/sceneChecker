@@ -9,8 +9,6 @@ try:
 except ImportError:
     from PySide2 import QtWidgets, QtCore, QtGui
 
-from . import checker as checker_module
-
 
 class CheckResultWidget(QtWidgets.QWidget):
     """個別のチェック結果を表示するウィジェット"""
@@ -220,11 +218,10 @@ class CheckResultWidget(QtWidgets.QWidget):
             return
 
         try:
-            # adjust_function名からグローバル関数を取得
-            adjust_func = getattr(checker_module, self.adjust_function, None)
-            if adjust_func and callable(adjust_func):
+            # adjust_functionは関数オブジェクトなので直接呼び出す
+            if callable(self.adjust_function):
                 # Adjust処理を実行
-                success = adjust_func(self.items)
+                success = self.adjust_function(self.items)
 
                 if success:
                     # 成功メッセージ
