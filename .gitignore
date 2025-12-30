@@ -17,6 +17,7 @@ build/
 .vscode/
 .idea/
 *.code-workspace
+.claude/
 
 # OS
 .DS_Store
