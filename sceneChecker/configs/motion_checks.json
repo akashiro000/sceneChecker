@@ -1,0 +1,50 @@
+{
+  "name": "Motion Checks",
+  "description": "モーション用のチェック項目",
+  "categories": {
+    "ジオメトリ": [
+      {
+        "name": "Geometry Issues",
+        "description": "ジオメトリの問題を検出",
+        "severity": "error",
+        "function": "check_geometry_issues"
+      }
+    ],
+    "リグ": [
+      {
+        "name": "Joint Orientation",
+        "description": "ジョイントの向きが正しいか確認",
+        "severity": "warning",
+        "function": "check_joint_orientation"
+      },
+      {
+        "name": "Skin Weights",
+        "description": "スキンウェイトの問題を検出",
+        "severity": "error",
+        "function": "check_skin_weights"
+      },
+      {
+        "name": "Unused Influences",
+        "description": "未使用のインフルエンスを検出",
+        "severity": "warning",
+        "function": "check_unused_influences"
+      }
+    ],
+    "アニメーション": [
+      {
+        "name": "Animation Keys",
+        "description": "アニメーションキーの問題を検出",
+        "severity": "warning",
+        "function": "check_animation_keys"
+      }
+    ],
+    "ネーミング": [
+      {
+        "name": "Naming Convention",
+        "description": "ネーミング規則の違反を検出",
+        "severity": "warning",
+        "function": "check_naming_issues"
+      }
+    ]
+  }
+}

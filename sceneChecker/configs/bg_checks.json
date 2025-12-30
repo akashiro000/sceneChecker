@@ -1,0 +1,49 @@
+{
+  "name": "BG Asset Checks",
+  "description": "背景アセット用のチェック項目",
+  "categories": {
+    "ジオメトリ": [
+      {
+        "name": "Non-Manifold Geometry",
+        "description": "非多様体ジオメトリを検出",
+        "function": "check_geometry_issues"
+      },
+      {
+        "name": "N-gons",
+        "description": "四角形以外のポリゴンを検出",
+        "function": "check_ngons"
+      },
+      {
+        "name": "Zero Area Faces",
+        "description": "面積がゼロのフェースを検出",
+        "function": "check_zero_area_faces"
+      }
+    ],
+    "テクスチャ": [
+      {
+        "name": "UV Issues",
+        "description": "UVの問題を検出（欠損、範囲外など）",
+        "function": "check_uv_issues"
+      },
+      {
+        "name": "Missing Textures",
+        "description": "テクスチャファイルが見つからないマテリアルを検出",
+        "function": "check_missing_textures"
+      }
+    ],
+    "ネーミング": [
+      {
+        "name": "BG Naming Convention",
+        "description": "背景アセット命名規則 (形式: {area}_{modelname}_{id}、例: maps_building_001)",
+        "function": "check_bg_naming_convention"
+      }
+    ],
+    "トランスフォーム": [
+      {
+        "name": "Transform Issues",
+        "description": "トランスフォームの問題を検出（非フリーズ、負のスケールなど）",
+        "function": "check_transform_issues"
+      }
+    ]
+  }
+}

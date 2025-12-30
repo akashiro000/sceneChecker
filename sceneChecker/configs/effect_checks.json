@@ -1,0 +1,44 @@
+{
+  "name": "Effect Checks",
+  "description": "エフェクト用のチェック項目",
+  "categories": {
+    "ジオメトリ": [
+      {
+        "name": "Geometry Issues",
+        "description": "ジオメトリの問題を検出",
+        "severity": "error",
+        "function": "check_geometry_issues"
+      }
+    ],
+    "シェーダー": [
+      {
+        "name": "Shader Issues",
+        "description": "シェーダーの問題を検出",
+        "severity": "error",
+        "function": "check_shader_issues"
+      }
+    ],
+    "テクスチャ": [
+      {
+        "name": "UV Issues",
+        "description": "UVの問題を検出",
+        "severity": "error",
+        "function": "check_uv_issues"
+      },
+      {
+        "name": "Texture Sequences",
+        "description": "テクスチャシーケンスの問題を検出",
+        "severity": "error",
+        "function": "check_texture_sequences"
+      }
+    ],
+    "ネーミング": [
+      {
+        "name": "Naming Convention",
+        "description": "ネーミング規則の違反を検出",
+        "severity": "warning",
+        "function": "check_naming_issues"
+      }
+    ]
+  }
+}
