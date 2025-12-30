@@ -13,7 +13,7 @@ except ImportError:
 class CheckResultWidget(QtWidgets.QWidget):
     """個別のチェック結果を表示するウィジェット"""
 
-    def __init__(self, check_name, count, severity, description="", items=None, adjust_function=None, parent=None):
+    def __init__(self, check_name, count, severity, description="", items=None, adjust_function=None, checker=None, parent=None):
         super(CheckResultWidget, self).__init__(parent)
 
         self.check_name = check_name
@@ -22,6 +22,7 @@ class CheckResultWidget(QtWidgets.QWidget):
         self.description = description
         self.items = items or []
         self.adjust_function = adjust_function
+        self.checker = checker  # SceneCheckerインスタンスへの参照
         self.is_expanded = False
 
         self.setup_ui()
@@ -82,6 +83,7 @@ class CheckResultWidget(QtWidgets.QWidget):
                     }
                 """)
             else:
+                self.adjust_btn.clicked.connect(self.on_adjust_clicked)
                 self.adjust_btn.setStyleSheet("""
                     QPushButton {
                         background-color: #4A90E2;
@@ -211,6 +213,48 @@ class CheckResultWidget(QtWidgets.QWidget):
         self.content.setVisible(self.is_expanded)
         self.expand_icon.setText("▼" if self.is_expanded else "▶")
 
+    def on_adjust_clicked(self):
+        """Adjustボタンがクリックされた時の処理"""
+        if not self.checker or not self.adjust_function:
+            return
+
+        try:
+            # adjust_function名からメソッドを取得
+            adjust_method = getattr(self.checker, self.adjust_function, None)
+            if adjust_method and callable(adjust_method):
+                # Adjust処理を実行
+                success = adjust_method(self.items)
+
+                if success:
+                    # 成功メッセージ
+                    try:
+                        from PySide6.QtWidgets import QMessageBox
+                    except ImportError:
+                        from PySide2.QtWidgets import QMessageBox
+
+                    msg = QMessageBox(self)
+                    msg.setWindowTitle("成功")
+                    msg.setText(f"{self.check_name} の修正が完了しました")
+                    msg.setIcon(QMessageBox.Icon.Information)
+                    msg.exec()
+
+                    # ウィンドウを閉じる（再チェックを促す）
+                    parent_window = self.window()
+                    if parent_window:
+                        parent_window.close()
+        except Exception as e:
+            # エラーメッセージ
+            try:
+                from PySide6.QtWidgets import QMessageBox
+            except ImportError:
+                from PySide2.QtWidgets import QMessageBox
+
+            msg = QMessageBox(self)
+            msg.setWindowTitle("エラー")
+            msg.setText(f"修正中にエラーが発生しました:\n{str(e)}")
+            msg.setIcon(QMessageBox.Icon.Critical)
+            msg.exec()
+
     def on_selection_changed(self):
         """リストビューの選択が変更された時の処理"""
         try:
@@ -238,7 +282,7 @@ class CheckResultWidget(QtWidgets.QWidget):
 class SceneCheckerUI(QtWidgets.QWidget):
     """Maya Scene Checkerのメインウィンドウ"""
 
-    def __init__(self, parent=None):
+    def __init__(self, checker=None, parent=None):
         super(SceneCheckerUI, self).__init__(parent)
 
         self.setWindowTitle("Maya Scene Checker")
@@ -251,6 +295,7 @@ class SceneCheckerUI(QtWidgets.QWidget):
         # モーダルではないことを明示的に設定
         self.setWindowModality(QtCore.Qt.NonModal)
 
+        self.checker = checker  # SceneCheckerインスタンスへの参照
         self.check_results = []
 
         self.setup_ui()
@@ -328,7 +373,7 @@ class SceneCheckerUI(QtWidgets.QWidget):
 
     def add_check_result(self, check_name, count, severity, description="", items=None, adjust_function=None):
         """チェック結果を追加"""
-        result_widget = CheckResultWidget(check_name, count, severity, description, items, adjust_function)
+        result_widget = CheckResultWidget(check_name, count, severity, description, items, adjust_function, self.checker)
         self.results_layout.insertWidget(self.results_layout.count() - 1, result_widget)
         self.check_results.append(result_widget)
 
