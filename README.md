@@ -13,7 +13,6 @@ Maya Scene Checkerは、Mayaシーンの品質をチェックし、一般的な�
 - **進捗表示**: ESCキーでキャンセル可能なプログレスダイアログ
 - **自動修正機能**: 修正可能な問題に対してAdjustボタンを提供
 - **バッチ処理**: 複数シーンファイルを一括チェックしてCSV出力
-- **ダークテーマ**: Figmaデザインに基づいたモダンなUI
 
 ## インストール
 
@@ -136,10 +135,6 @@ batch_multiple(scene_files, "bg_checks", output_dir="C:/temp/results")
 ## ライセンス
 
 MIT License
-
-## 貢献
-
-Issue報告やプルリクエストを歓迎します。
 
 ## 作者
 
