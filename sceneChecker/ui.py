@@ -238,11 +238,6 @@ class CheckResultWidget(QtWidgets.QWidget):
                     msg.setText(f"{self.check_name} の修正が完了しました")
                     msg.setIcon(QMessageBox.Icon.Information)
                     msg.exec()
-
-                    # ウィンドウを閉じる（再チェックを促す）
-                    parent_window = self.window()
-                    if parent_window:
-                        parent_window.close()
         except Exception as e:
             # エラーメッセージ
             try:
