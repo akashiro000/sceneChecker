@@ -68,7 +68,7 @@ def run_scene_checker(config_name="bg_checks"):
             return
 
         # 結果ウィンドウを表示（モードレス、parentなしで完全独立）
-        result_ui = SceneCheckerUI(checker=checker, parent=None)
+        result_ui = SceneCheckerUI(parent=None)
 
         # 結果を追加
         for result_data in results:
